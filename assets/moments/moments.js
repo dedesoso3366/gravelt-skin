@@ -32,7 +32,7 @@ const html = document.documentElement;
 const linked = new Map();
 function css(href) {
   if (!linked.has(href)) {
-    const done = [...document.querySelectorAll('link[rel="stylesheet"]')].some(l => l.href === href);
+    const done = [...document.querySelectorAll('link[rel="stylesheet"]')].some(l => l.href === href) || !!document.querySelector('link[data-bundle]');
     linked.set(href, done ? Promise.resolve() : new Promise(res => {
       const l = document.createElement('link');
       l.rel = 'stylesheet';
